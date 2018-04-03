@@ -1,0 +1,36 @@
+# This file defines which files would be checked out before compiling in the builder.
+# Format:
+#   get-type(1,0):path(modules/xxx):localdir:rev-num(HEAD, 123)
+#
+#   (":" is the separator,so please don't use it in all parameters)
+#
+# Parameters:
+#   get-type =0,only checkout
+#             1,checkout and compile,it invokes "local dir"/build-only.bat(sh)
+#             2,only export(faster than checkout)
+#             3,export and compile
+#             4,reserved
+#             5,reserved
+#
+#   path      subversion url,don't include base url,e.g. products/xxx
+#
+#   localdir  specify the local directories,generally speaking,just same to "path"
+#             (don't change it,if your project is sensitive on path when compiling)
+#
+#   rev       indicate the revision which want to use,HEAD means lastest revison
+#
+#   ("build" or "build-branches" have checked out automatically,don't do it again.)
+#
+#
+
+# checkout necessary 3rdparty
+#2:3rdparty/javalib/lib:3rdparty/javalib/lib:HEAD
+
+#checkout necessary modules
+
+#checkout project code -- trunk
+2:service/gridmarket/pom.xml:service/gridmarket/pom.xml:HEAD
+2:service/gridmarket/src:service/gridmarket/src:HEAD
+2:service/gridmarket/bin:service/gridmarket/bin:HEAD
+
+

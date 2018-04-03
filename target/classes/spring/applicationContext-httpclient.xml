@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- 连接管理器 -->
+	<bean id="connectionManager" class="org.apache.http.impl.conn.PoolingHttpClientConnectionManager" >
+		<property name="maxTotal" value="${http.maxTotal}"></property>
+		<property name="defaultMaxPerRoute" value="${http.defaultMaxPerRoute}"></property>
+	</bean>
+	<!-- 配置httpclientBuilder对象 -->
+	<bean id="httpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder">
+		<property name="connectionManager" ref="connectionManager"></property>
+	</bean>
+	
+	<!-- 把httpclient对象设置成多例 -->
+	<bean class="org.apache.http.impl.client.CloseableHttpClient" factory-bean="httpClientBuilder" factory-method="build" scope="prototype"></bean>
+
+	
+	<!-- 定义requestConfigBuilder -->
+	<bean id="requestConfigBuilder" class="org.apache.http.client.config.RequestConfig.Builder">
+		<property name="connectTimeout" value="${http.connectTimeout}"></property>
+		<property name="connectionRequestTimeout" value="${http.connectionRequestTimeout}"></property>
+		<property name="socketTimeout" value="${http.socketTimeout}"></property>
+		<property name="staleConnectionCheckEnabled" value="${http.staleConnectionCheckEnabled}"></property>
+		
+	</bean>
+	<!-- 配置请求参数 -->
+	<bean class="org.apache.http.client.config.RequestConfig" factory-bean="requestConfigBuilder" factory-method="build"></bean>
+	
+	<!-- 配置清理无效连接 -->
+<!-- 	<bean class="com.lebron.springmvc.util.IdleConnectionEvictor"> -->
+<!-- 		<constructor-arg index="0" ref="connectionManager"/> -->
+<!-- 	</bean> -->
+</beans>

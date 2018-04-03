@@ -1,0 +1,47 @@
+# This file defines what strings would be appended to appointed files in the builder.
+# Format:
+#   set-type(1,0):build-type(012345):string/path2file
+#
+#   (":" is the separator,so please don't use it in all parameters)
+#
+# Parameters:
+#   set-type   =0     append to tail of the file
+#               1     set the filename and new it
+#   build-type =0     for all build type
+#               1     only for dailybuild
+#               2     officialbuild
+#               3     testingbuild
+#               4     reserved
+#               5     engineeringbuild
+#               6     reserved
+#
+#   string      may use !colon! to display ":",same to other variables
+#               colon
+#               n1=major-num
+#               n2=minor-num
+#               n3=rev-num
+#               n4=beta-num
+#               n5=build-num
+#               schedule_name
+#               schedule_description
+#               year
+#               shortYear
+#               month
+#               dayOfMonth
+#               numericMonth
+#               dayOfWeek
+#               numericDayOfWeek
+#               dayOfYear
+#               weekOfYear
+#               hour
+#               minute
+#               second
+#               ...
+#
+#   path2file   the filename with path,relate to the trunk directory
+#
+#
+
+1:0:service\gridmarket\src\main\resources\build.properties
+0:0:buildversion=Version 2.!n3!.!n4! Build!n5!
+

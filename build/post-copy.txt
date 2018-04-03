@@ -1,0 +1,30 @@
+# This file defines which files would be copied to specified place after compiling.
+# Format:
+#   copy-type(1,0):add-type(1,0):source:destination(default is artifacts,only in autobuilder)
+#
+#   (":" is the separator,so please don't use it in all parameters)
+#
+# Parameters:
+#   copy-type=0,default setting(win)
+#             1,reserved(win)
+#             2,default setting(linux)
+#             3,reserved(linux)
+#
+#   add-type =0,default setting
+#             1,reserved
+#
+#   source    local path to the file,e.g. products/xxx.cpp(can use wildcard)
+#
+#   destination
+#             local dir to the destination,if null,copy to default artifacts dir
+#
+#
+
+#for win32
+#0:0:path/to/your files:
+
+#for linux
+
+
+2:0:service/gridmarket/bin/gridmarket*.war:
+2:0:service/gridmarket/build/relea*.txt:
